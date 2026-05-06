@@ -4,12 +4,10 @@ ABaseCharacter::ABaseCharacter()
 {
     PrimaryActorTick.bCanEverTick = false;
 
-    USkeletalMeshComponent* SkeletalMeshComp = GetMesh();
-
-    if (SkeletalMeshComp)
+    if (USkeletalMeshComponent* SkeletalMeshComp = GetMesh())
     {
         SkeletalMeshComp->SetRelativeRotation(FRotator(0.0f, -90.0f, 0.0f));
-        SkeletalMeshComp->SetRelativeLocation(FVector(0.0f, 0.0f, -90.0f));
+        SkeletalMeshComp->SetRelativeLocation(FVector(0.0f, 0.0f, -70.0f));
     }
 }
 
