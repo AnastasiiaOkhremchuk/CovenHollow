@@ -12,15 +12,13 @@ APlayerCharacter::APlayerCharacter()
 	if (UCharacterMovementComponent* MovementComp = GetCharacterMovement())
 	{
 		MovementComp->bOrientRotationToMovement = false;
-		MovementComp->RotationRate = FRotator(0.f, 540.f, 0.f);
+		MovementComp->RotationRate = FRotator(0.0f, 400.0f, 0.0f);
 	}
 
 	ArmComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("ArmComp"));
 	ArmComp->SetRelativeLocation(FVector(0.0f, 0.0f, 50.0f));
 	ArmComp->SetupAttachment(GetRootComponent());
 	ArmComp->TargetArmLength = 200.0f;
-	ArmComp->CameraLagSpeed = 10.0f;
-	ArmComp->bEnableCameraLag = true;
 	ArmComp->bUsePawnControlRotation = true;
 
 	CameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("CameraComp"));
