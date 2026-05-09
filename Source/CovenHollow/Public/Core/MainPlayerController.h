@@ -34,5 +34,4 @@ private:
 	TObjectPtr<UInputAction> MoveAction;
 	UPROPERTY(EditDefaultsOnly, Category = "CovenHollow|EnhancedInput")
 	TObjectPtr<UInputAction> LookAction;
-
 };

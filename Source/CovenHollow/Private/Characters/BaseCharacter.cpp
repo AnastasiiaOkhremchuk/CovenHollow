@@ -11,3 +11,8 @@ ABaseCharacter::ABaseCharacter()
     }
 }
 
+UAbilitySystemComponent* ABaseCharacter::GetAbilitySystemComponent() const
+{
+    return AbilitySystemComp;
+}
+
