@@ -18,7 +18,12 @@ class COVENHOLLOW_API APlayerCharacter : public ABaseCharacter
 public:
 	APlayerCharacter();
 
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+
 private:
+	void InitAbilityActorInfo();
+
 	UPROPERTY(EditDefaultsOnly, Category = "CovenHollow|Components")
 	TObjectPtr<USpringArmComponent> ArmComp;
 	UPROPERTY(EditDefaultsOnly, Category = "CovenHollow|Components")

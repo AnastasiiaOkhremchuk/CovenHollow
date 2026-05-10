@@ -5,6 +5,7 @@
 AMainPlayerState::AMainPlayerState()
 {
 	AbilitySystemComp = CreateDefaultSubobject<UCharacterAbilitySystemComponent>(TEXT("AbilitySystemComp"));
+	AbilitySystemComp->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 	AbilitySystemComp->SetIsReplicated(true);
 
 	AttributeSet = CreateDefaultSubobject<UCharacterAttributeSet>(TEXT("AttributeSet"));

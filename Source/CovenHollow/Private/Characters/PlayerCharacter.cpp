@@ -1,9 +1,11 @@
 #include "Characters/PlayerCharacter.h"
 #include "Core/MainPlayerController.h"
+#include "Core/MainPlayerState.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "AbilitySystemComponent.h"
 
 APlayerCharacter::APlayerCharacter()
 {
@@ -28,5 +30,29 @@ APlayerCharacter::APlayerCharacter()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
+}
+
+void APlayerCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	InitAbilityActorInfo();
+}
+
+void APlayerCharacter::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+
+	InitAbilityActorInfo();
+}
+
+void APlayerCharacter::InitAbilityActorInfo()
+{
+	AMainPlayerState* MainPlayerState = GetPlayerState<AMainPlayerState>();
+	check(MainPlayerState);
+
+	MainPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(MainPlayerState, this);
+	AbilitySystemComp = MainPlayerState->GetAbilitySystemComponent();
+	AttributeSet = MainPlayerState->GetAttributeSet();
 }
 

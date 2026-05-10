@@ -5,7 +5,15 @@
 ABaseEnemy::ABaseEnemy()
 {
     AbilitySystemComp = CreateDefaultSubobject<UCharacterAbilitySystemComponent>(TEXT("AbilitySystemComp"));
+    AbilitySystemComp->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
     AbilitySystemComp->SetIsReplicated(true);
 
     AttributeSet = CreateDefaultSubobject<UCharacterAttributeSet>(TEXT("AttributeSet"));
+}
+
+void ABaseEnemy::BeginPlay()
+{
+    Super::BeginPlay();
+
+    AbilitySystemComp->InitAbilityActorInfo(this, this);
 }

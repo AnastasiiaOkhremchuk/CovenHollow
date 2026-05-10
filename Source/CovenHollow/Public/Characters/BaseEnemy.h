@@ -12,5 +12,8 @@ class COVENHOLLOW_API ABaseEnemy : public ABaseCharacter
 
 public:
 	ABaseEnemy();
+
+protected:
+	virtual void BeginPlay() override;
 	
 };
