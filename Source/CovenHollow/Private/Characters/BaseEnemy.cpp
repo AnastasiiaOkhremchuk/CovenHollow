@@ -4,6 +4,8 @@
 
 ABaseEnemy::ABaseEnemy()
 {
+    PrimaryActorTick.bCanEverTick = false;
+
     AbilitySystemComp = CreateDefaultSubobject<UCharacterAbilitySystemComponent>(TEXT("AbilitySystemComp"));
     AbilitySystemComp->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
     AbilitySystemComp->SetIsReplicated(true);

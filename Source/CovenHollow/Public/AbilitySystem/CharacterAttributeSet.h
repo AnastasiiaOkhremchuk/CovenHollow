@@ -22,7 +22,6 @@ public:
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
-protected:
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health, Category = "CovenHollow|Attributes")
 	FGameplayAttributeData Health;
 	ATTRIBUTE_ACCESSORS(UCharacterAttributeSet, Health)
@@ -36,6 +35,7 @@ protected:
 	FGameplayAttributeData MaxMana;
 	ATTRIBUTE_ACCESSORS(UCharacterAttributeSet, MaxMana)
 
+protected:
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData& OldHealth);
 	UFUNCTION()

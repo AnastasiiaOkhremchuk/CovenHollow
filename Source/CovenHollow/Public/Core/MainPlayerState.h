@@ -22,9 +22,9 @@ public:
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 protected:
-	UPROPERTY(VisibleAnywhere, Category = "CovenHollow|GAS")
+	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|GAS")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComp;
-	UPROPERTY(VisibleAnywhere, Category = "CovenHollow|GAS")
+	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|GAS")
 	TObjectPtr<UAttributeSet> AttributeSet;
 	
 };

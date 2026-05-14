@@ -21,11 +21,12 @@ public:
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
 
+protected:
+	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|Components")
+	TObjectPtr<USpringArmComponent> ArmComp;
+	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|Components")
+	TObjectPtr<UCameraComponent> CameraComp;
+
 private:
 	void InitAbilityActorInfo();
-
-	UPROPERTY(EditDefaultsOnly, Category = "CovenHollow|Components")
-	TObjectPtr<USpringArmComponent> ArmComp;
-	UPROPERTY(EditDefaultsOnly, Category = "CovenHollow|Components")
-	TObjectPtr<UCameraComponent> CameraComp;
 };
