@@ -3,10 +3,10 @@
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
 
-#include "CharacterUserWidget.generated.h"
+#include "BaseWidget.generated.h"
 
 UCLASS()
-class COVENHOLLOW_API UCharacterUserWidget : public UUserWidget
+class COVENHOLLOW_API UBaseWidget : public UUserWidget
 {
 	GENERATED_BODY()
 
@@ -20,5 +20,5 @@ protected:
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "CovenHollow|WidgetController")
 	void WidgetControllerSet();
-	
+
 };
