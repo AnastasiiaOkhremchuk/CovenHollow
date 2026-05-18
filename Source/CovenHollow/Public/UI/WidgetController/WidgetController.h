@@ -8,10 +8,35 @@
 class UAbilitySystemComponent;
 class UAttributeSet;
 
+USTRUCT(BlueprintType)
+struct FWidgetControllerParams
+{
+	GENERATED_BODY()
+
+public:
+	FWidgetControllerParams() = default;
+	FWidgetControllerParams(APlayerController* InPlayerController, APlayerState* InPlayerState, UAbilitySystemComponent* InAbilitySystemComp, UAttributeSet* InAttributeSet)
+		: PlayerController(InPlayerController), PlayerState(InPlayerState), AbilitySystemComp(InAbilitySystemComp), AttributeSet(InAttributeSet){}
+
+	UPROPERTY(BlueprintReadOnly, Category = "CovenHollow|Core")
+	TObjectPtr<APlayerController> PlayerController = nullptr;
+	UPROPERTY(BlueprintReadOnly, Category = "CovenHollow|Core")
+	TObjectPtr<APlayerState> PlayerState = nullptr;
+
+	UPROPERTY(BlueprintReadOnly, Category = "CovenHollow|GAS")
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComp = nullptr;
+	UPROPERTY(BlueprintReadOnly, Category = "CovenHollow|GAS")
+	TObjectPtr<UAttributeSet> AttributeSet = nullptr;
+};
+
 UCLASS()
 class COVENHOLLOW_API UWidgetController : public UObject
 {
 	GENERATED_BODY()
+
+public:
+	UFUNCTION(BlueprintCallable)
+	void InitWidgetControllerParams(const FWidgetControllerParams& InWidgetControllerParams);
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "CovenHollow|Core")
