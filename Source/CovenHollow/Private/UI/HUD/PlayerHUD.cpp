@@ -1,18 +1,30 @@
 #include "UI/HUD/PlayerHUD.h"
 #include "UI/Widgets/BaseWidget.h"
+#include "UI/WidgetControllers/OverlayWidgetController.h"
 
-void APlayerHUD::BeginPlay()
+void APlayerHUD::InitOverlayWidget(APlayerController* InPlayerController, APlayerState* InPlayerState, UAbilitySystemComponent* InAbilitySystemComp, UAttributeSet* InAttributeSet)
 {
-	Super::BeginPlay();
+	if (!ensure(OverlayWidgetClass) || !ensure(OverlayWidgetControllerClass))
+	{
+		return;
+	}
 
-	InitOverlayWidget();
+	const FWidgetControllerParams WidgetControllerParams(InPlayerController, InPlayerState, InAbilitySystemComp, InAttributeSet);
+
+	OverlayWidget = CreateWidget<UBaseWidget>(GetWorld(), OverlayWidgetClass);
+	check(OverlayWidget);
+
+	OverlayWidget->SetWidgetController(GetOverlayWidgetController(WidgetControllerParams));
+	OverlayWidget->AddToViewport();
 }
 
-void APlayerHUD::InitOverlayWidget()
+UOverlayWidgetController* APlayerHUD::GetOverlayWidgetController(const FWidgetControllerParams& InWidgetControllerParams)
 {
-	if (ensure(OverlayWidgetClass))
+	if (OverlayWidgetController == nullptr)
 	{
-		UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass);
-		Widget->AddToViewport();
+		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
+		OverlayWidgetController->InitWidgetControllerParams(InWidgetControllerParams);
 	}
+
+	return OverlayWidgetController;
 }

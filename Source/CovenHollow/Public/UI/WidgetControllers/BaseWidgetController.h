@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "UObject/Object.h"
 
-#include "WidgetController.generated.h"
+#include "BaseWidgetController.generated.h"
 
 class UAbilitySystemComponent;
 class UAttributeSet;
@@ -30,7 +30,7 @@ public:
 };
 
 UCLASS()
-class COVENHOLLOW_API UWidgetController : public UObject
+class COVENHOLLOW_API UBaseWidgetController : public UObject
 {
 	GENERATED_BODY()
 

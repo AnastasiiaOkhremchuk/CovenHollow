@@ -1,6 +1,6 @@
-#include "UI/WidgetController/WidgetController.h"
+#include "UI/WidgetControllers/BaseWidgetController.h"
 
-void UWidgetController::InitWidgetControllerParams(const FWidgetControllerParams& InWidgetControllerParams)
+void UBaseWidgetController::InitWidgetControllerParams(const FWidgetControllerParams& InWidgetControllerParams)
 {
 	check(InWidgetControllerParams.PlayerController);
 	check(InWidgetControllerParams.PlayerState);
