@@ -17,10 +17,10 @@ class COVENHOLLOW_API APlayerHUD : public AHUD
 	GENERATED_BODY()
 
 public:
-	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& InWidgetControllerParams);
+	void InitOverlayWidget(APlayerController* InPlayerController, APlayerState* InPlayerState, UAbilitySystemComponent* InAbilitySystemComp, UAttributeSet* InAttributeSet);
 
 private:
-	void InitOverlayWidget(APlayerController* InPlayerController, APlayerState* InPlayerState, UAbilitySystemComponent* InAbilitySystemComp, UAttributeSet* InAttributeSet);
+	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& InWidgetControllerParams);
 
 	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|UI")
 	TObjectPtr<UBaseWidget> OverlayWidget;

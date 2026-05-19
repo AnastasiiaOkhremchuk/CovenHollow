@@ -1,6 +1,7 @@
 #include "Characters/PlayerCharacter.h"
 #include "Core/MainPlayerController.h"
 #include "Core/MainPlayerState.h"
+#include "UI/HUD/PlayerHUD.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -54,5 +55,13 @@ void APlayerCharacter::InitAbilityActorInfo()
 	MainPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(MainPlayerState, this);
 	AbilitySystemComp = MainPlayerState->GetAbilitySystemComponent();
 	AttributeSet = MainPlayerState->GetAttributeSet();
+
+	if (AMainPlayerController* MainPlayerController = Cast<AMainPlayerController>(GetController()))
+	{
+		if (APlayerHUD* PlayerHUD = Cast<APlayerHUD>(MainPlayerController->GetHUD()))
+		{
+			PlayerHUD->InitOverlayWidget(MainPlayerController, MainPlayerState, AbilitySystemComp, AttributeSet);
+		}
+	}
 }
 
