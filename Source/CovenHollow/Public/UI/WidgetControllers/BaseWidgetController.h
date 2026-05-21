@@ -35,6 +35,8 @@ class COVENHOLLOW_API UBaseWidgetController : public UObject
 	GENERATED_BODY()
 
 public:
+	virtual void BroadcastInitialValues();
+
 	UFUNCTION(BlueprintCallable)
 	void InitWidgetControllerParams(const FWidgetControllerParams& InWidgetControllerParams);
 

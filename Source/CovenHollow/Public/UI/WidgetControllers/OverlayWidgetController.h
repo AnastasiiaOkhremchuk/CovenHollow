@@ -5,9 +5,20 @@
 
 #include "OverlayWidgetController.generated.h"
 
-UCLASS()
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangedSignature, float, NewHealth);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHealthChangedSignature, float, NewMaxHealth);
+
+UCLASS(BlueprintType, Blueprintable)
 class COVENHOLLOW_API UOverlayWidgetController : public UBaseWidgetController
 {
 	GENERATED_BODY()
+
+public:
+	virtual void BroadcastInitialValues() override;
+
+	UPROPERTY(BlueprintAssignable, Category = "CovenHollow|Delegates")
+	FOnHealthChangedSignature OnHealthChanged;
+	UPROPERTY(BlueprintAssignable, Category = "CovenHollow|Delegates")
+	FOnMaxHealthChangedSignature OnMaxHealthChanged;
 	
 };

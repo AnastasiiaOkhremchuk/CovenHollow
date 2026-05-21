@@ -12,3 +12,7 @@ void UBaseWidgetController::InitWidgetControllerParams(const FWidgetControllerPa
 	AbilitySystemComp = InWidgetControllerParams.AbilitySystemComp;
 	AttributeSet = InWidgetControllerParams.AttributeSet;
 }
+
+void UBaseWidgetController::BroadcastInitialValues()
+{
+}

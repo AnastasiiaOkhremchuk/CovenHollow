@@ -15,6 +15,7 @@ void APlayerHUD::InitOverlayWidget(APlayerController* InPlayerController, APlaye
 	check(OverlayWidget);
 
 	OverlayWidget->SetWidgetController(GetOverlayWidgetController(WidgetControllerParams));
+	OverlayWidgetController->BroadcastInitialValues();
 	OverlayWidget->AddToViewport();
 }
 
