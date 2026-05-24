@@ -16,3 +16,7 @@ void UBaseWidgetController::InitWidgetControllerParams(const FWidgetControllerPa
 void UBaseWidgetController::BroadcastInitialValues()
 {
 }
+
+void UBaseWidgetController::BindCallbacksToDependencies()
+{
+}

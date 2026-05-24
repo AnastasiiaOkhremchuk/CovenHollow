@@ -36,6 +36,7 @@ class COVENHOLLOW_API UBaseWidgetController : public UObject
 
 public:
 	virtual void BroadcastInitialValues();
+	virtual void BindCallbacksToDependencies();
 
 	UFUNCTION(BlueprintCallable)
 	void InitWidgetControllerParams(const FWidgetControllerParams& InWidgetControllerParams);
