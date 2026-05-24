@@ -32,7 +32,9 @@ void ABaseItem::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor*
 	{
 		const UCharacterAttributeSet* CharacterAttributeSet = Cast<UCharacterAttributeSet>(ASCInterface->GetAbilitySystemComponent()->GetAttributeSet(UCharacterAttributeSet::StaticClass()));
 		UCharacterAttributeSet* MutableCharacterAttributeSet = const_cast<UCharacterAttributeSet*>(CharacterAttributeSet);
+
 		MutableCharacterAttributeSet->SetHealth(CharacterAttributeSet->GetHealth() + 25.0f);
+		MutableCharacterAttributeSet->SetMana(CharacterAttributeSet->GetMana() - 25.0f);
 
 		Destroy();
 	}
