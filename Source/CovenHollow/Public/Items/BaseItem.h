@@ -6,6 +6,7 @@
 #include "BaseItem.generated.h"
 
 class USphereComponent;
+class UGameplayEffect;
 
 UCLASS(Abstract)
 class COVENHOLLOW_API ABaseItem : public AActor
@@ -19,12 +20,16 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|Components")
+	TObjectPtr<USceneComponent> SceneComp;
+	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|Components")
 	TObjectPtr<UStaticMeshComponent> StaticMeshComp;
 	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|Components")
 	TObjectPtr<USphereComponent> SphereComp;
 
-	UFUNCTION()
-	virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepHitResult);
-	UFUNCTION()
-	virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex);
+	UFUNCTION(BlueprintCallable)
+	void ApplyEffectToTarget(AActor* InTarget, TSubclassOf<UGameplayEffect> InGameplayEffectClass);
+
+private:
+	UPROPERTY(EditDefaultsOnly, Category = "CovenHollow|GAS")
+	TSubclassOf<UGameplayEffect> GameplayEffectClass;
 };

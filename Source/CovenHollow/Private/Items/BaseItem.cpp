@@ -4,13 +4,18 @@
 #include "Components/SphereComponent.h"
 #include "AbilitySystemInterface.h"
 #include "AbilitySystemComponent.h"
+#include "AbilitySystemBlueprintLibrary.h"
 
 ABaseItem::ABaseItem()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
+	SceneComp = CreateDefaultSubobject<USceneComponent>(TEXT("SceneComp"));
+	SetRootComponent(SceneComp);
+
 	StaticMeshComp = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComp"));
-	SetRootComponent(StaticMeshComp);
+	StaticMeshComp->SetCollisionProfileName(TEXT("NoCollision"));
+	StaticMeshComp->SetupAttachment(GetRootComponent());
 
 	SphereComp = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
 	SphereComp->SetupAttachment(GetRootComponent());
@@ -19,30 +24,25 @@ ABaseItem::ABaseItem()
 void ABaseItem::BeginPlay()
 {
 	Super::BeginPlay();
-
-	SphereComp->OnComponentBeginOverlap.AddDynamic(this, &ABaseItem::OnOverlapBegin);
-	SphereComp->OnComponentEndOverlap.AddDynamic(this, &ABaseItem::OnOverlapEnd);
 }
 
-void ABaseItem::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+void ABaseItem::ApplyEffectToTarget(AActor* InTarget, TSubclassOf<UGameplayEffect> InGameplayEffectClass)
 {
-	//TODO: Change this to apply a Gameplay Effect.
+	UAbilitySystemComponent* Target = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(InTarget);
 
-	if (IAbilitySystemInterface* ASCInterface = Cast<IAbilitySystemInterface>(OtherActor))
+	if (!Target || !ensure(InGameplayEffectClass))
 	{
-		const UCharacterAttributeSet* CharacterAttributeSet = Cast<UCharacterAttributeSet>(ASCInterface->GetAbilitySystemComponent()->GetAttributeSet(UCharacterAttributeSet::StaticClass()));
-		UCharacterAttributeSet* MutableCharacterAttributeSet = const_cast<UCharacterAttributeSet*>(CharacterAttributeSet);
-
-		MutableCharacterAttributeSet->SetHealth(CharacterAttributeSet->GetHealth() + 25.0f);
-		MutableCharacterAttributeSet->SetMana(CharacterAttributeSet->GetMana() - 25.0f);
-
-		Destroy();
+		return;
 	}
-}
 
-void ABaseItem::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex)
-{
+	FGameplayEffectContextHandle EffectContextHandle = Target->MakeEffectContext();
+	EffectContextHandle.AddSourceObject(this);
+	FGameplayEffectSpecHandle EffectSpecHandle = Target->MakeOutgoingSpec(InGameplayEffectClass, 1.0f, EffectContextHandle);
 
+	if (EffectSpecHandle.IsValid())
+	{
+		Target->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
+	}
 }
 
 
