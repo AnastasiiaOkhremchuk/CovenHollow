@@ -26,10 +26,9 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|Components")
 	TObjectPtr<USphereComponent> SphereComp;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|GAS")
+	TSubclassOf<UGameplayEffect> GameplayEffectClass;
+
 	UFUNCTION(BlueprintCallable)
 	void ApplyEffectToTarget(AActor* InTarget, TSubclassOf<UGameplayEffect> InGameplayEffectClass);
-
-private:
-	UPROPERTY(EditDefaultsOnly, Category = "CovenHollow|GAS")
-	TSubclassOf<UGameplayEffect> GameplayEffectClass;
 };
