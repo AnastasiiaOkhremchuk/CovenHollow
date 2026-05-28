@@ -30,6 +30,8 @@ protected:
 	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|GAS")
 	TSubclassOf<UGameplayEffect> DurationGameplayEffectClass;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|GAS")
+	TSubclassOf<UGameplayEffect> PeriodicGameplayEffectClass;
 
 	UFUNCTION(BlueprintCallable)
 	void ApplyEffectToTarget(AActor* InTarget, TSubclassOf<UGameplayEffect> InGameplayEffectClass);
