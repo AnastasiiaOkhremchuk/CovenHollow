@@ -71,4 +71,8 @@ protected:
 
 	UFUNCTION(BlueprintCallable)
 	void ApplyEffectToTarget(AActor* InTarget, TSubclassOf<UGameplayEffect> InGameplayEffectClass);
+	UFUNCTION(BlueprintCallable)
+	void OnOverlap(AActor* InTarget);
+	UFUNCTION(BlueprintCallable)
+	void OnEndOverlap(AActor* InTarget);
 };

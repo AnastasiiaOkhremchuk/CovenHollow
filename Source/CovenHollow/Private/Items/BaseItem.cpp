@@ -37,11 +37,40 @@ void ABaseItem::ApplyEffectToTarget(AActor* InTarget, TSubclassOf<UGameplayEffec
 
 	FGameplayEffectContextHandle EffectContextHandle = Target->MakeEffectContext();
 	EffectContextHandle.AddSourceObject(this);
-	FGameplayEffectSpecHandle EffectSpecHandle = Target->MakeOutgoingSpec(InGameplayEffectClass, 1.0f, EffectContextHandle);
 
-	if (EffectSpecHandle.IsValid())
+	const FGameplayEffectSpecHandle EffectSpecHandle = Target->MakeOutgoingSpec(InGameplayEffectClass, 1.0f, EffectContextHandle);
+	const FActiveGameplayEffectHandle ActiveEffectHandle = Target->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
+}
+
+void ABaseItem::OnOverlap(AActor* InTarget)
+{
+	if (InstantEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnOverlap)
 	{
-		Target->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
+		ApplyEffectToTarget(InTarget, InstantGameplayEffectClass);
+	}
+	if (DurationEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnOverlap)
+	{
+		ApplyEffectToTarget(InTarget, DurationGameplayEffectClass);
+	}
+	if (PeriodicEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnOverlap)
+	{
+		ApplyEffectToTarget(InTarget, PeriodicGameplayEffectClass);
+	}
+}
+
+void ABaseItem::OnEndOverlap(AActor* InTarget)
+{
+	if (InstantEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnEndOverlap)
+	{
+		ApplyEffectToTarget(InTarget, InstantGameplayEffectClass);
+	}
+	if (DurationEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnEndOverlap)
+	{
+		ApplyEffectToTarget(InTarget, DurationGameplayEffectClass);
+	}
+	if (PeriodicEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnEndOverlap)
+	{
+		ApplyEffectToTarget(InTarget, PeriodicGameplayEffectClass);
 	}
 }
 
