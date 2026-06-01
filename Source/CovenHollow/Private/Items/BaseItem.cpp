@@ -1,5 +1,6 @@
 #include "Items/BaseItem.h"
 #include "AbilitySystem/CharacterAttributeSet.h"
+#include "AbilitySystem/CharacterAbilitySystemComponent.h"
 
 #include "Components/SphereComponent.h"
 #include "AbilitySystemInterface.h"
@@ -40,6 +41,13 @@ void ABaseItem::ApplyEffectToTarget(AActor* InTarget, TSubclassOf<UGameplayEffec
 
 	const FGameplayEffectSpecHandle EffectSpecHandle = Target->MakeOutgoingSpec(InGameplayEffectClass, 1.0f, EffectContextHandle);
 	const FActiveGameplayEffectHandle ActiveEffectHandle = Target->ApplyGameplayEffectSpecToSelf(*EffectSpecHandle.Data.Get());
+
+	const bool bIsInfinite = EffectSpecHandle.Data.Get()->Def.Get()->DurationPolicy == EGameplayEffectDurationType::Infinite;
+
+	if (bIsInfinite && InfiniteEffectRemovalPolicy == EEffectRemovalPolicy::RemoveOnEndOverlap)
+	{
+		ActiveEffectHandlesMap.Add(ActiveEffectHandle, Target);
+	}
 }
 
 void ABaseItem::OnOverlap(AActor* InTarget)
@@ -55,6 +63,10 @@ void ABaseItem::OnOverlap(AActor* InTarget)
 	if (PeriodicEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnOverlap)
 	{
 		ApplyEffectToTarget(InTarget, PeriodicGameplayEffectClass);
+	}
+	if (InfiniteEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnOverlap)
+	{
+		ApplyEffectToTarget(InTarget, InfiniteGameplayEffectClass);
 	}
 }
 
@@ -72,7 +84,32 @@ void ABaseItem::OnEndOverlap(AActor* InTarget)
 	{
 		ApplyEffectToTarget(InTarget, PeriodicGameplayEffectClass);
 	}
+	if (InfiniteEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnEndOverlap)
+	{
+		ApplyEffectToTarget(InTarget, InfiniteGameplayEffectClass);
+	}
+	if (InfiniteEffectRemovalPolicy == EEffectRemovalPolicy::RemoveOnEndOverlap)
+	{
+		UAbilitySystemComponent* Target = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(InTarget);
+
+		if (Target)
+		{
+			TArray<FActiveGameplayEffectHandle> HandlesToRemove;
+			for (TTuple<FActiveGameplayEffectHandle, UAbilitySystemComponent*> Handle: ActiveEffectHandlesMap)
+			{
+				if (Target == Handle.Value)
+				{
+					Target->RemoveActiveGameplayEffect(Handle.Key, 1);
+					HandlesToRemove.Add(Handle.Key);
+				}
+			}
+			for (auto& Handle : HandlesToRemove)
+			{
+				ActiveEffectHandlesMap.FindAndRemoveChecked(Handle);
+			}
+		}
+	}
 }
 
-
+ 
 

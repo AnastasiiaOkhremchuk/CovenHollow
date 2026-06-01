@@ -2,11 +2,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "GameplayEffectTypes.h"
 
 #include "BaseItem.generated.h"
 
+class UCharacterAbilitySystemComponent;
+
 class USphereComponent;
-class UGameplayEffect;
 class UParticleSystemComponent;
 
 UENUM(BlueprintType)
@@ -75,4 +77,7 @@ protected:
 	void OnOverlap(AActor* InTarget);
 	UFUNCTION(BlueprintCallable)
 	void OnEndOverlap(AActor* InTarget);
+
+private:
+	TMap<FActiveGameplayEffectHandle, UAbilitySystemComponent*> ActiveEffectHandlesMap;
 };
