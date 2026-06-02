@@ -1,11 +1,11 @@
 #include "UI/WidgetControllers/OverlayWidgetController.h"
-#include "AbilitySystem/CharacterAttributeSet.h"
+#include "AbilitySystem/BaseAttributeSet.h"
 
 #include "AbilitySystemComponent.h"
 
 void UOverlayWidgetController::BroadcastInitialValues()
 {
-    if (const UCharacterAttributeSet* CharacterAttributeSet = Cast<UCharacterAttributeSet>(AttributeSet))
+    if (const UBaseAttributeSet* CharacterAttributeSet = Cast<UBaseAttributeSet>(AttributeSet))
     {
         OnHealthChanged.Broadcast(CharacterAttributeSet->GetHealth());
         OnMaxHealthChanged.Broadcast(CharacterAttributeSet->GetMaxHealth());
@@ -18,7 +18,7 @@ void UOverlayWidgetController::BroadcastInitialValues()
 
 void UOverlayWidgetController::BindCallbacksToDependencies()
 {
-    if (const UCharacterAttributeSet* CharacterAttributeSet = Cast<UCharacterAttributeSet>(AttributeSet))
+    if (const UBaseAttributeSet* CharacterAttributeSet = Cast<UBaseAttributeSet>(AttributeSet))
     {
         AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(CharacterAttributeSet->GetHealthAttribute()).AddUObject(this, &UOverlayWidgetController::HealthChanged);
         AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(CharacterAttributeSet->GetMaxHealthAttribute()).AddUObject(this, &UOverlayWidgetController::MaxHealthChanged);

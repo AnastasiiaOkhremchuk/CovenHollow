@@ -3,40 +3,20 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "GameplayEffectTypes.h"
+#include "BaseGameplayEffectTypes.h"
 
-#include "BaseItem.generated.h"
-
-class UCharacterAbilitySystemComponent;
+#include "BaseGameplayEffect.generated.h"
 
 class USphereComponent;
 class UParticleSystemComponent;
 
-UENUM(BlueprintType)
-enum class EEffectApplicationPolicy : uint8
-{
-	ApplyOnOverlap UMETA(DisplayName = "ApplyOnOverlap"),
-	ApplyOnEndOverlap UMETA(DisplayName = "ApplyOnEndOverlap"),
-	DoNotApply UMETA(DisplayName = "DoNotApply"),
-
-	MAX UMETA(Hidden)
-};
-
-UENUM(BlueprintType)
-enum class EEffectRemovalPolicy : uint8
-{
-	RemoveOnEndOverlap UMETA(DisplayName = "RemoveOnEndOverlap"),
-	DoNotRemove UMETA(DisplayName = "DoNotRemove"),
-
-	MAX UMETA(Hidden)
-};
-
 UCLASS(Abstract)
-class COVENHOLLOW_API ABaseItem : public AActor
+class COVENHOLLOW_API ABaseGameplayEffect : public AActor
 {
 	GENERATED_BODY()
 	
 public:	
-	ABaseItem();
+	ABaseGameplayEffect();
 
 protected:
 	virtual void BeginPlay() override;
@@ -50,17 +30,6 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Variables")
 	bool bDestroyOnEffectRemoval = false;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Enumerations")
-	EEffectApplicationPolicy InstantEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Enumerations")
-	EEffectApplicationPolicy DurationEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Enumerations")
-	EEffectApplicationPolicy PeriodicEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Enumerations")
-	EEffectApplicationPolicy InfiniteEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Enumerations")
-	EEffectRemovalPolicy InfiniteEffectRemovalPolicy = EEffectRemovalPolicy::RemoveOnEndOverlap;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Effects")
 	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass;
@@ -80,4 +49,15 @@ protected:
 
 private:
 	TMap<FActiveGameplayEffectHandle, UAbilitySystemComponent*> ActiveEffectHandlesMap;
+
+	UPROPERTY(EditDefaultsOnly, Category = "CovenHollow|Enumerations")
+	EEffectApplicationPolicy InstantEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
+	UPROPERTY(EditDefaultsOnly, Category = "CovenHollow|Enumerations")
+	EEffectApplicationPolicy DurationEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
+	UPROPERTY(EditDefaultsOnly, Category = "CovenHollow|Enumerations")
+	EEffectApplicationPolicy PeriodicEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
+	UPROPERTY(EditDefaultsOnly, Category = "CovenHollow|Enumerations")
+	EEffectApplicationPolicy InfiniteEffectApplicationPolicy = EEffectApplicationPolicy::DoNotApply;
+	UPROPERTY(EditDefaultsOnly, Category = "CovenHollow|Enumerations")
+	EEffectRemovalPolicy InfiniteEffectRemovalPolicy = EEffectRemovalPolicy::RemoveOnEndOverlap;
 };

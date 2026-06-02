@@ -1,16 +1,16 @@
 #include "Characters/BaseEnemy.h"
-#include "AbilitySystem/CharacterAbilitySystemComponent.h"
-#include "AbilitySystem/CharacterAttributeSet.h"
+#include "AbilitySystem/BaseAbilitySystemComponent.h"
+#include "AbilitySystem/BaseAttributeSet.h"
 
 ABaseEnemy::ABaseEnemy()
 {
     PrimaryActorTick.bCanEverTick = false;
 
-    AbilitySystemComp = CreateDefaultSubobject<UCharacterAbilitySystemComponent>(TEXT("AbilitySystemComp"));
+    AbilitySystemComp = CreateDefaultSubobject<UBaseAbilitySystemComponent>(TEXT("AbilitySystemComp"));
     AbilitySystemComp->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
     AbilitySystemComp->SetIsReplicated(true);
 
-    AttributeSet = CreateDefaultSubobject<UCharacterAttributeSet>(TEXT("AttributeSet"));
+    AttributeSet = CreateDefaultSubobject<UBaseAttributeSet>(TEXT("AttributeSet"));
 }
 
 void ABaseEnemy::BeginPlay()

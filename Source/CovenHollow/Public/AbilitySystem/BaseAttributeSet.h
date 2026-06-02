@@ -4,7 +4,7 @@
 #include "AttributeSet.h"
 #include "AbilitySystemComponent.h"
 
-#include "CharacterAttributeSet.generated.h"
+#include "BaseAttributeSet.generated.h"
 
 #define ATTRIBUTE_ACCESSORS(ClassName, PropertyName) \
     GAMEPLAYATTRIBUTE_PROPERTY_GETTER(ClassName, PropertyName) \
@@ -13,33 +13,33 @@
     GAMEPLAYATTRIBUTE_VALUE_INITTER(PropertyName)
 
 UCLASS()
-class COVENHOLLOW_API UCharacterAttributeSet : public UAttributeSet
+class COVENHOLLOW_API UBaseAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
 
 public:
-	UCharacterAttributeSet();
+	UBaseAttributeSet();
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Health, Category = "CovenHollow|Attributes")
 	FGameplayAttributeData Health;
-	ATTRIBUTE_ACCESSORS(UCharacterAttributeSet, Health)
+	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, Health)
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxHealth, Category = "CovenHollow|Attributes")
 	FGameplayAttributeData MaxHealth;
-	ATTRIBUTE_ACCESSORS(UCharacterAttributeSet, MaxHealth)
+	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, MaxHealth)
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Mana, Category = "CovenHollow|Attributes")
 	FGameplayAttributeData Mana;
-	ATTRIBUTE_ACCESSORS(UCharacterAttributeSet, Mana)
+	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, Mana)
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxMana, Category = "CovenHollow|Attributes")
 	FGameplayAttributeData MaxMana;
-	ATTRIBUTE_ACCESSORS(UCharacterAttributeSet, MaxMana)
+	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, MaxMana)
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_Stamina, Category = "CovenHollow|Attributes")
 	FGameplayAttributeData Stamina;
-	ATTRIBUTE_ACCESSORS(UCharacterAttributeSet, Stamina)
+	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, Stamina)
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_MaxStamina, Category = "CovenHollow|Attributes")
 	FGameplayAttributeData MaxStamina;
-	ATTRIBUTE_ACCESSORS(UCharacterAttributeSet, MaxStamina)
+	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, MaxStamina)
 
 
 protected:

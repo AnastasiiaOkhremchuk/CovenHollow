@@ -1,13 +1,11 @@
-#include "Items/BaseItem.h"
-#include "AbilitySystem/CharacterAttributeSet.h"
-#include "AbilitySystem/CharacterAbilitySystemComponent.h"
+#include "GameplayEffects/BaseGameplayEffect.h"
 
 #include "Components/SphereComponent.h"
 #include "AbilitySystemInterface.h"
 #include "AbilitySystemComponent.h"
 #include "AbilitySystemBlueprintLibrary.h"
 
-ABaseItem::ABaseItem()
+ABaseGameplayEffect::ABaseGameplayEffect()
 {
 	PrimaryActorTick.bCanEverTick = false;
 
@@ -22,12 +20,12 @@ ABaseItem::ABaseItem()
 	SphereComp->SetupAttachment(GetRootComponent());
 }
 
-void ABaseItem::BeginPlay()
+void ABaseGameplayEffect::BeginPlay()
 {
 	Super::BeginPlay();
 }
 
-void ABaseItem::ApplyEffectToTarget(AActor* InTarget, TSubclassOf<UGameplayEffect> InGameplayEffectClass)
+void ABaseGameplayEffect::ApplyEffectToTarget(AActor* InTarget, TSubclassOf<UGameplayEffect> InGameplayEffectClass)
 {
 	UAbilitySystemComponent* Target = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(InTarget);
 
@@ -50,7 +48,7 @@ void ABaseItem::ApplyEffectToTarget(AActor* InTarget, TSubclassOf<UGameplayEffec
 	}
 }
 
-void ABaseItem::OnOverlap(AActor* InTarget)
+void ABaseGameplayEffect::OnOverlap(AActor* InTarget)
 {
 	if (InstantEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnOverlap)
 	{
@@ -70,7 +68,7 @@ void ABaseItem::OnOverlap(AActor* InTarget)
 	}
 }
 
-void ABaseItem::OnEndOverlap(AActor* InTarget)
+void ABaseGameplayEffect::OnEndOverlap(AActor* InTarget)
 {
 	if (InstantEffectApplicationPolicy == EEffectApplicationPolicy::ApplyOnEndOverlap)
 	{

@@ -1,14 +1,14 @@
 #include "Core/MainPlayerState.h"
-#include "AbilitySystem/CharacterAbilitySystemComponent.h"
-#include "AbilitySystem/CharacterAttributeSet.h"
+#include "AbilitySystem/BaseAbilitySystemComponent.h"
+#include "AbilitySystem/BaseAttributeSet.h"
 
 AMainPlayerState::AMainPlayerState()
 {
-	AbilitySystemComp = CreateDefaultSubobject<UCharacterAbilitySystemComponent>(TEXT("AbilitySystemComp"));
+	AbilitySystemComp = CreateDefaultSubobject<UBaseAbilitySystemComponent>(TEXT("AbilitySystemComp"));
 	AbilitySystemComp->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
 	AbilitySystemComp->SetIsReplicated(true);
 
-	AttributeSet = CreateDefaultSubobject<UCharacterAttributeSet>(TEXT("AttributeSet"));
+	AttributeSet = CreateDefaultSubobject<UBaseAttributeSet>(TEXT("AttributeSet"));
 
 	NetUpdateFrequency = 100.0f;
 }
