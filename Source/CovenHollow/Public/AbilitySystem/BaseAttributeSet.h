@@ -21,6 +21,7 @@ public:
 	UBaseAttributeSet();
 
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	virtual void PreAttributeChange(const FGameplayAttribute& Attrubute, float& NewValue) override;
 
 	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, Health)
 	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, MaxHealth)
