@@ -1,8 +1,8 @@
-#include "Core/MainPlayerState.h"
+#include "Core/CHPlayerState.h"
 #include "AbilitySystem/BaseAbilitySystemComponent.h"
 #include "AbilitySystem/BaseAttributeSet.h"
 
-AMainPlayerState::AMainPlayerState()
+ACHPlayerState::ACHPlayerState()
 {
 	AbilitySystemComp = CreateDefaultSubobject<UBaseAbilitySystemComponent>(TEXT("AbilitySystemComp"));
 	AbilitySystemComp->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
@@ -13,7 +13,7 @@ AMainPlayerState::AMainPlayerState()
 	NetUpdateFrequency = 100.0f;
 }
 
-UAbilitySystemComponent* AMainPlayerState::GetAbilitySystemComponent() const
+UAbilitySystemComponent* ACHPlayerState::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComp;
 }

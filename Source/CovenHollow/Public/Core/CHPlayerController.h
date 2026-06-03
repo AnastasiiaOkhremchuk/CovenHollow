@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 
-#include "MainPlayerController.generated.h"
+#include "CHPlayerController.generated.h"
 
 class UInputMappingContext;
 class UInputAction;
@@ -11,12 +11,12 @@ class UInputAction;
 struct FInputActionValue;
 
 UCLASS()
-class COVENHOLLOW_API AMainPlayerController : public APlayerController
+class COVENHOLLOW_API ACHPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
 public:
-	AMainPlayerController();
+	ACHPlayerController();
 
 protected:
 	virtual void BeginPlay() override;

@@ -1,22 +1,22 @@
-#include "Core/MainPlayerController.h"
+#include "Core/CHPlayerController.h"
 #include "Characters/PlayerCharacter.h"
 
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 
-AMainPlayerController::AMainPlayerController()
+ACHPlayerController::ACHPlayerController()
 {
     bReplicates = true;
 }
 
-void AMainPlayerController::BeginPlay()
+void ACHPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
 	InitInputMappingContext();
 }
 
-void AMainPlayerController::InitInputMappingContext()
+void ACHPlayerController::InitInputMappingContext()
 {
 	if (!IsLocalController() || !ensure(InputMappingContext))
 	{
@@ -32,7 +32,7 @@ void AMainPlayerController::InitInputMappingContext()
 	}
 }
 
-void AMainPlayerController::SetupInputComponent()
+void ACHPlayerController::SetupInputComponent()
 {
     Super::SetupInputComponent();
 
@@ -40,15 +40,15 @@ void AMainPlayerController::SetupInputComponent()
 
 	if (ensure(MoveAction))
 	{
-		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AMainPlayerController::OnMove);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ACHPlayerController::OnMove);
 	}
 	if (ensure(LookAction))
 	{
-		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AMainPlayerController::OnLook);
+		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ACHPlayerController::OnLook);
 	}
 }
 
-void AMainPlayerController::OnMove(const FInputActionValue& InValue)
+void ACHPlayerController::OnMove(const FInputActionValue& InValue)
 {
 	APawn* ControlledPawn = GetPawn<APawn>();
 	if (!ControlledPawn)
@@ -73,7 +73,7 @@ void AMainPlayerController::OnMove(const FInputActionValue& InValue)
 	ControlledPawn->AddMovementInput(MoveDirection);
 }
 
-void AMainPlayerController::OnLook(const FInputActionValue& InValue)
+void ACHPlayerController::OnLook(const FInputActionValue& InValue)
 {
 	const FVector2D RotationVector = InValue.Get<FVector2D>();
 

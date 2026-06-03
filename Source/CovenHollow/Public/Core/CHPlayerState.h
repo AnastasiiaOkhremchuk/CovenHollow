@@ -4,18 +4,18 @@
 #include "GameFramework/PlayerState.h"
 #include "AbilitySystemInterface.h"
 
-#include "MainPlayerState.generated.h"
+#include "CHPlayerState.generated.h"
 
 class UAbilitySystemComponent;
 class UAttributeSet;
 
 UCLASS()
-class COVENHOLLOW_API AMainPlayerState : public APlayerState, public IAbilitySystemInterface
+class COVENHOLLOW_API ACHPlayerState : public APlayerState, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
 public:
-	AMainPlayerState();
+	ACHPlayerState();
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 

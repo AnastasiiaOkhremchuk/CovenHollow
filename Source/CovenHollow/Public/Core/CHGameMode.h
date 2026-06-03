@@ -3,10 +3,10 @@
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
 
-#include "MainGameMode.generated.h"
+#include "CHGameMode.generated.h"
 
 UCLASS()
-class COVENHOLLOW_API AMainGameMode : public AGameModeBase
+class COVENHOLLOW_API ACHGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 	

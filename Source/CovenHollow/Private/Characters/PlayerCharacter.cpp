@@ -1,6 +1,6 @@
 #include "Characters/PlayerCharacter.h"
-#include "Core/MainPlayerController.h"
-#include "Core/MainPlayerState.h"
+#include "Core/CHPlayerController.h"
+#include "Core/CHPlayerState.h"
 #include "UI/HUD/PlayerHUD.h"
 
 #include "GameFramework/CharacterMovementComponent.h"
@@ -49,18 +49,18 @@ void APlayerCharacter::OnRep_PlayerState()
 
 void APlayerCharacter::InitAbilityActorInfo()
 {
-	AMainPlayerState* MainPlayerState = GetPlayerState<AMainPlayerState>();
-	check(MainPlayerState);
+	ACHPlayerState* CHPlayerState = GetPlayerState<ACHPlayerState>();
+	check(CHPlayerState);
 
-	MainPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(MainPlayerState, this);
-	AbilitySystemComp = MainPlayerState->GetAbilitySystemComponent();
-	AttributeSet = MainPlayerState->GetAttributeSet();
+	CHPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(CHPlayerState, this);
+	AbilitySystemComp = CHPlayerState->GetAbilitySystemComponent();
+	AttributeSet = CHPlayerState->GetAttributeSet();
 
-	if (AMainPlayerController* MainPlayerController = Cast<AMainPlayerController>(GetController()))
+	if (ACHPlayerController* CHPlayerController = Cast<ACHPlayerController>(GetController()))
 	{
-		if (APlayerHUD* PlayerHUD = Cast<APlayerHUD>(MainPlayerController->GetHUD()))
+		if (APlayerHUD* PlayerHUD = Cast<APlayerHUD>(CHPlayerController->GetHUD()))
 		{
-			PlayerHUD->InitOverlayWidget(MainPlayerController, MainPlayerState, AbilitySystemComp, AttributeSet);
+			PlayerHUD->InitOverlayWidget(CHPlayerController, CHPlayerState, AbilitySystemComp, AttributeSet);
 		}
 	}
 }
