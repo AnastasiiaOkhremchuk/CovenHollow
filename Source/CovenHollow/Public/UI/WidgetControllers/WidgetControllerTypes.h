@@ -19,13 +19,8 @@ public:
 		: PlayerController(InPlayerController), PlayerState(InPlayerState), AbilitySystemComp(InAbilitySystemComp), AttributeSet(InAttributeSet) {
 	}
 
-	UPROPERTY(BlueprintReadOnly, Category = "CovenHollow|Core")
 	TObjectPtr<APlayerController> PlayerController = nullptr;
-	UPROPERTY(BlueprintReadOnly, Category = "CovenHollow|Core")
 	TObjectPtr<APlayerState> PlayerState = nullptr;
-
-	UPROPERTY(BlueprintReadOnly, Category = "CovenHollow|GAS")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComp = nullptr;
-	UPROPERTY(BlueprintReadOnly, Category = "CovenHollow|GAS")
 	TObjectPtr<UAttributeSet> AttributeSet = nullptr;
 };

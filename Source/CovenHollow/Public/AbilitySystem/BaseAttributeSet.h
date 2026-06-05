@@ -58,5 +58,8 @@ protected:
 	void OnRep_Stamina(const FGameplayAttributeData& OldStamina);
 	UFUNCTION()
 	void OnRep_MaxStamina(const FGameplayAttributeData& OldMaxStamina);
+
+private:
+	void InitEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;
 	
 };
