@@ -28,8 +28,10 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|Components")
 	TObjectPtr<USphereComponent> SphereComp;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Variables")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Properties")
 	bool bDestroyOnEffectRemoval = false;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Properties")
+	float ActorLevel = 1.0f;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Effects")
 	TSubclassOf<UGameplayEffect> InstantGameplayEffectClass;
