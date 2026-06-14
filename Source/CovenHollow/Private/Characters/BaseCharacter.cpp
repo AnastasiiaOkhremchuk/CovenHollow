@@ -11,6 +11,11 @@ ABaseCharacter::ABaseCharacter()
     }
 }
 
+void ABaseCharacter::InitAbilityActorInfo()
+{
+
+}
+
 UAbilitySystemComponent* ABaseCharacter::GetAbilitySystemComponent() const
 {
     return AbilitySystemComp;

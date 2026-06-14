@@ -1,4 +1,5 @@
 #include "Characters/PlayerCharacter.h"
+#include "AbilitySystem/BaseAbilitySystemComponent.h"
 #include "Core/CHPlayerController.h"
 #include "Core/CHPlayerState.h"
 #include "UI/HUD/PlayerHUD.h"
@@ -53,6 +54,9 @@ void APlayerCharacter::InitAbilityActorInfo()
 	check(CHPlayerState);
 
 	CHPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(CHPlayerState, this);
+
+	Cast<UBaseAbilitySystemComponent>(CHPlayerState->GetAbilitySystemComponent())->InitAbilityActorInfo();
+
 	AbilitySystemComp = CHPlayerState->GetAbilitySystemComponent();
 	AttributeSet = CHPlayerState->GetAttributeSet();
 

@@ -22,6 +22,8 @@ public:
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 
 protected:
+	virtual void InitAbilityActorInfo();
+
 	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|GAS")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComp;
 	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|GAS")

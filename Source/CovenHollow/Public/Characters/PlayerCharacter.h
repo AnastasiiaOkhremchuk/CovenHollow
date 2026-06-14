@@ -22,11 +22,10 @@ public:
 	virtual void OnRep_PlayerState() override;
 
 protected:
+	virtual void InitAbilityActorInfo() override;
+
 	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|Components")
 	TObjectPtr<USpringArmComponent> ArmComp;
 	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|Components")
 	TObjectPtr<UCameraComponent> CameraComp;
-
-private:
-	void InitAbilityActorInfo();
 };

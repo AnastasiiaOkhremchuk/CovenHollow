@@ -17,5 +17,11 @@ void ABaseEnemy::BeginPlay()
 {
     Super::BeginPlay();
 
+    InitAbilityActorInfo();
+}
+
+void ABaseEnemy::InitAbilityActorInfo()
+{
     AbilitySystemComp->InitAbilityActorInfo(this, this);
+    Cast<UBaseAbilitySystemComponent>(AbilitySystemComp)->InitAbilityActorInfo();
 }
