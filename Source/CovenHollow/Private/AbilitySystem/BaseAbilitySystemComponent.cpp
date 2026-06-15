@@ -9,9 +9,5 @@ void UBaseAbilitySystemComponent::EffectApplied(UAbilitySystemComponent* Ability
 {
 	FGameplayTagContainer TagContainer;
 	EffectSpec.GetAllAssetTags(TagContainer);
-	for (const FGameplayTag& Tag : TagContainer)
-	{
-		const FString Msg = FString::Printf(TEXT("GE tag: %s"), *Tag.ToString());
-		GEngine->AddOnScreenDebugMessage(-1, 8.0f, FColor::Blue, Msg);
-	}
+	EffectAssetTags.Broadcast(TagContainer);
 }

@@ -1,31 +1,44 @@
 #include "UI/WidgetControllers/OverlayWidgetController.h"
+#include "AbilitySystem/BaseAbilitySystemComponent.h"
 #include "AbilitySystem/BaseAttributeSet.h"
 
 #include "AbilitySystemComponent.h"
 
 void UOverlayWidgetController::BroadcastInitialValues()
 {
-    if (const UBaseAttributeSet* CharacterAttributeSet = Cast<UBaseAttributeSet>(AttributeSet))
+    if (const UBaseAttributeSet* BaseAttributeSet = Cast<UBaseAttributeSet>(AttributeSet))
     {
-        OnHealthChanged.Broadcast(CharacterAttributeSet->GetHealth());
-        OnMaxHealthChanged.Broadcast(CharacterAttributeSet->GetMaxHealth());
-        OnManaChanged.Broadcast(CharacterAttributeSet->GetMana());
-        OnMaxManaChanged.Broadcast(CharacterAttributeSet->GetMaxMana());
-        OnStaminaChanged.Broadcast(CharacterAttributeSet->GetStamina());
-        OnMaxStaminaChanged.Broadcast(CharacterAttributeSet->GetMaxStamina());
+        OnHealthChanged.Broadcast(BaseAttributeSet->GetHealth());
+        OnMaxHealthChanged.Broadcast(BaseAttributeSet->GetMaxHealth());
+        OnManaChanged.Broadcast(BaseAttributeSet->GetMana());
+        OnMaxManaChanged.Broadcast(BaseAttributeSet->GetMaxMana());
+        OnStaminaChanged.Broadcast(BaseAttributeSet->GetStamina());
+        OnMaxStaminaChanged.Broadcast(BaseAttributeSet->GetMaxStamina());
     }
 }
 
 void UOverlayWidgetController::BindCallbacksToDependencies()
 {
-    if (const UBaseAttributeSet* CharacterAttributeSet = Cast<UBaseAttributeSet>(AttributeSet))
+    if (const UBaseAttributeSet* BaseAttributeSet = Cast<UBaseAttributeSet>(AttributeSet))
     {
-        AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(CharacterAttributeSet->GetHealthAttribute()).AddUObject(this, &UOverlayWidgetController::HealthChanged);
-        AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(CharacterAttributeSet->GetMaxHealthAttribute()).AddUObject(this, &UOverlayWidgetController::MaxHealthChanged);
-        AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(CharacterAttributeSet->GetManaAttribute()).AddUObject(this, &UOverlayWidgetController::ManaChanged);
-        AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(CharacterAttributeSet->GetMaxManaAttribute()).AddUObject(this, &UOverlayWidgetController::MaxManaChanged);
-        AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(CharacterAttributeSet->GetStaminaAttribute()).AddUObject(this, &UOverlayWidgetController::StaminaChanged);
-        AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(CharacterAttributeSet->GetMaxStaminaAttribute()).AddUObject(this, &UOverlayWidgetController::MaxStaminaChanged);
+        AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(BaseAttributeSet->GetHealthAttribute()).AddUObject(this, &UOverlayWidgetController::HealthChanged);
+        AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(BaseAttributeSet->GetMaxHealthAttribute()).AddUObject(this, &UOverlayWidgetController::MaxHealthChanged);
+        AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(BaseAttributeSet->GetManaAttribute()).AddUObject(this, &UOverlayWidgetController::ManaChanged);
+        AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(BaseAttributeSet->GetMaxManaAttribute()).AddUObject(this, &UOverlayWidgetController::MaxManaChanged);
+        AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(BaseAttributeSet->GetStaminaAttribute()).AddUObject(this, &UOverlayWidgetController::StaminaChanged);
+        AbilitySystemComp->GetGameplayAttributeValueChangeDelegate(BaseAttributeSet->GetMaxStaminaAttribute()).AddUObject(this, &UOverlayWidgetController::MaxStaminaChanged);
+    }
+
+    if (UBaseAbilitySystemComponent* BaseAbilitySystemComponent = Cast<UBaseAbilitySystemComponent>(AbilitySystemComp))
+    {
+        BaseAbilitySystemComponent->GetEffectAssetTags().AddLambda([](const FGameplayTagContainer& AssetTags)
+        {
+            for (const FGameplayTag& Tag : AssetTags)
+            {
+                const FString Msg = FString::Printf(TEXT("GE tag: %s"), *Tag.ToString());
+                GEngine->AddOnScreenDebugMessage(-1, 8.0f, FColor::Blue, Msg);
+            }
+        });
     }
 }
 
