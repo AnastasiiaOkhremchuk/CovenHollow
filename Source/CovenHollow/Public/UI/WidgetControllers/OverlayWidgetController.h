@@ -37,6 +37,9 @@ public:
 	FOnMaxStaminaChangedSignature OnMaxStaminaChanged;
 
 protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Data")
+	TObjectPtr<UDataTable> MessageWidgetDataTable;
+
 	void HealthChanged(const FOnAttributeChangeData& Data) const;
 	void MaxHealthChanged(const FOnAttributeChangeData& Data) const;
 	void ManaChanged(const FOnAttributeChangeData& Data) const;

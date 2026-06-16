@@ -6,6 +6,8 @@
 
 #include "AbilitySystemTypes.generated.h"
 
+class UBaseWidget;
+
 USTRUCT(BlueprintType)
 struct FEffectProperties
 {
@@ -25,4 +27,22 @@ public:
     AActor* TargetActor = nullptr;
     AController* TargetController = nullptr;
     ACharacter* TargetCharacter = nullptr;
+};
+
+USTRUCT(BlueprintType)
+struct FMessageWidgetRow : public FTableRowBase
+{
+    GENERATED_BODY()
+
+public:
+    FMessageWidgetRow() = default;
+
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|MessageWidgetRow")
+    FGameplayTag MessageTag;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|MessageWidgetRow")
+    FText Message;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|MessageWidgetRow")
+    TObjectPtr<UTexture2D> Image;
+    UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|MessageWidgetRow")
+    TSubclassOf<UBaseWidget> MessageWidgetClass;
 };

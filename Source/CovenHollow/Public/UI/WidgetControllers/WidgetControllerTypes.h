@@ -19,8 +19,12 @@ public:
 		: PlayerController(InPlayerController), PlayerState(InPlayerState), AbilitySystemComp(InAbilitySystemComp), AttributeSet(InAttributeSet) {
 	}
 
-	TObjectPtr<APlayerController> PlayerController = nullptr;
-	TObjectPtr<APlayerState> PlayerState = nullptr;
-	TObjectPtr<UAbilitySystemComponent> AbilitySystemComp = nullptr;
-	TObjectPtr<UAttributeSet> AttributeSet = nullptr;
+	UPROPERTY()
+	TObjectPtr<APlayerController> PlayerController;
+	UPROPERTY()
+	TObjectPtr<APlayerState> PlayerState;
+	UPROPERTY()
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComp;
+	UPROPERTY()
+	TObjectPtr<UAttributeSet> AttributeSet;
 };
