@@ -31,12 +31,14 @@ void UOverlayWidgetController::BindCallbacksToDependencies()
 
     if (UBaseAbilitySystemComponent* BaseAbilitySystemComponent = Cast<UBaseAbilitySystemComponent>(AbilitySystemComp))
     {
-        BaseAbilitySystemComponent->GetEffectAssetTags().AddLambda([](const FGameplayTagContainer& AssetTags)
+        BaseAbilitySystemComponent->GetEffectAssetTags().AddLambda([this](const FGameplayTagContainer& AssetTags)
         {
             for (const FGameplayTag& Tag : AssetTags)
             {
                 const FString Msg = FString::Printf(TEXT("GE tag: %s"), *Tag.ToString());
                 GEngine->AddOnScreenDebugMessage(-1, 8.0f, FColor::Blue, Msg);
+
+                FMessageWidgetRow* Row = GetDataTableRowByTag<FMessageWidgetRow>(MessageWidgetDataTable, Tag);
             }
         });
     }
