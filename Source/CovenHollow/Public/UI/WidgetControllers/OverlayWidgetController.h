@@ -2,12 +2,12 @@
 
 #include "CoreMinimal.h"
 #include "UI/WidgetControllers/BaseWidgetController.h"
+#include "AbilitySystem/AbilitySystemTypes.h"
 #include "GameplayTagContainer.h"
 
 #include "OverlayWidgetController.generated.h"
 
 struct FOnAttributeChangeData;
-//struct FGameplayTag;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnHealthChangedSignature, float, NewHealth);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxHealthChangedSignature, float, NewMaxHealth);
@@ -15,6 +15,7 @@ DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnManaChangedSignature, float, NewM
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxManaChangedSignature, float, NewMaxMana);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnStaminaChangedSignature, float, NewStamina);
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMaxStaminaChangedSignature, float, NewMaxStamina);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnMessageWidgetRowSignature, FMessageWidgetRow, Row);
 
 UCLASS(BlueprintType, Blueprintable)
 class COVENHOLLOW_API UOverlayWidgetController : public UBaseWidgetController
@@ -37,6 +38,8 @@ public:
 	FOnStaminaChangedSignature OnStaminaChanged;
 	UPROPERTY(BlueprintAssignable, Category = "CovenHollow|Delegates")
 	FOnMaxStaminaChangedSignature OnMaxStaminaChanged;
+	UPROPERTY(BlueprintAssignable, Category = "CovenHollow|Delegates")
+	FOnMessageWidgetRowSignature OnMessageWidgetRow;
 
 protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Data")
