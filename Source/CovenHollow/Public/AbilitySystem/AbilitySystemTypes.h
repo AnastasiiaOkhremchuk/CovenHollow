@@ -42,7 +42,7 @@ public:
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|MessageWidgetRow")
     FText Message;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|MessageWidgetRow")
-    TObjectPtr<UTexture2D> Image;
+    TObjectPtr<UTexture2D> Icon;
     UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|MessageWidgetRow")
     TSubclassOf<UBaseWidget> MessageWidgetClass;
 };
