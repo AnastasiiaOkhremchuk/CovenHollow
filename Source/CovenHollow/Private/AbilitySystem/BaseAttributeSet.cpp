@@ -51,6 +51,19 @@ void UBaseAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 
 	FEffectProperties EffectProperties;
 	InitEffectProperties(Data, EffectProperties);
+
+	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
+	{
+		SetHealth(FMath::Clamp(GetHealth(), 0.0f, GetMaxHealth()));
+	}
+	if (Data.EvaluatedData.Attribute == GetManaAttribute())
+	{
+		SetMana(FMath::Clamp(GetMana(), 0.0f, GetMaxMana()));
+	}
+	if (Data.EvaluatedData.Attribute == GetStaminaAttribute())
+	{
+		SetStamina(FMath::Clamp(GetStamina(), 0.0f, GetMaxStamina()));
+	}
 }
 
 void UBaseAttributeSet::InitEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const
