@@ -1,4 +1,5 @@
 #include "Characters/BaseCharacter.h"
+#include "AbilitySystemComponent.h"
 
 ABaseCharacter::ABaseCharacter()
 {
@@ -14,6 +15,24 @@ ABaseCharacter::ABaseCharacter()
 void ABaseCharacter::InitAbilityActorInfo()
 {
 
+}
+
+void ABaseCharacter::InitPrimaryAttributes()
+{
+    UAbilitySystemComponent* ASC = GetAbilitySystemComponent();
+
+    if (!ensure(ASC) || !ensure(DefaultPrimaryAttributesClass))
+    {
+        return;
+    }
+
+    const FGameplayEffectContextHandle ContextHandle = ASC->MakeEffectContext();
+    const FGameplayEffectSpecHandle SpecHandle = ASC->MakeOutgoingSpec(DefaultPrimaryAttributesClass, 1.0f, ContextHandle);
+
+    if (SpecHandle.IsValid())
+    {
+        ASC->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(), ASC);
+    }
 }
 
 UAbilitySystemComponent* ABaseCharacter::GetAbilitySystemComponent() const

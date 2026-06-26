@@ -67,5 +67,7 @@ void APlayerCharacter::InitAbilityActorInfo()
 			PlayerHUD->InitOverlayWidget(CHPlayerController, CHPlayerState, AbilitySystemComp, AttributeSet);
 		}
 	}
+
+	InitPrimaryAttributes();
 }
 

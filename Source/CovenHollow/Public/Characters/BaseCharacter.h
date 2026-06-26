@@ -8,6 +8,7 @@
 
 class UAbilitySystemComponent;
 class UAttributeSet;
+class UGameplayEffect;
 
 UCLASS(Abstract)
 class COVENHOLLOW_API ABaseCharacter : public ACharacter, public IAbilitySystemInterface
@@ -24,9 +25,14 @@ public:
 protected:
 	virtual void InitAbilityActorInfo();
 
+	void InitPrimaryAttributes();
+
 	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|GAS")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComp;
 	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|GAS")
 	TObjectPtr<UAttributeSet> AttributeSet;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Effects")
+	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributesClass;
 
 };
