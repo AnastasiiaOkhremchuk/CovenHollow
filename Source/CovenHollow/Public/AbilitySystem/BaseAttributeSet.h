@@ -139,6 +139,7 @@ protected:
 	* Secondary attributes
 	*/
 
+	UFUNCTION()
 	void OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth);
 	UFUNCTION()
 	void OnRep_MaxMana(const FGameplayAttributeData& OldMaxMana);
@@ -160,7 +161,6 @@ protected:
 	void OnRep_ManaRegeneration(const FGameplayAttributeData& OldManaRegeneration);
 	UFUNCTION()
 	void OnRep_StaminaRegeneration(const FGameplayAttributeData& OldStaminaRegeneration);
-	UFUNCTION()
 
 private:
 	void InitEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props) const;

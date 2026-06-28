@@ -17,17 +17,23 @@ void ABaseCharacter::InitAbilityActorInfo()
 
 }
 
-void ABaseCharacter::InitPrimaryAttributes()
+void ABaseCharacter::InitDefaultAttributes()
+{
+    ApplyEffectToSelf(DefaultPrimaryAttributesClass, 1.0f);
+    ApplyEffectToSelf(DefaultSecondaryAttributesClass, 1.0f);
+}
+
+void ABaseCharacter::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level)
 {
     UAbilitySystemComponent* ASC = GetAbilitySystemComponent();
 
-    if (!ensure(ASC) || !ensure(DefaultPrimaryAttributesClass))
+    if (!ensure(ASC) || !ensure(GameplayEffectClass))
     {
         return;
     }
 
     const FGameplayEffectContextHandle ContextHandle = ASC->MakeEffectContext();
-    const FGameplayEffectSpecHandle SpecHandle = ASC->MakeOutgoingSpec(DefaultPrimaryAttributesClass, 1.0f, ContextHandle);
+    const FGameplayEffectSpecHandle SpecHandle = ASC->MakeOutgoingSpec(GameplayEffectClass, Level, ContextHandle);
 
     if (SpecHandle.IsValid())
     {

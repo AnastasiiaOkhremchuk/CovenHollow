@@ -25,14 +25,17 @@ public:
 protected:
 	virtual void InitAbilityActorInfo();
 
-	void InitPrimaryAttributes();
+	void InitDefaultAttributes();
+	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level);
 
 	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|GAS")
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComp;
 	UPROPERTY(VisibleDefaultsOnly, Category = "CovenHollow|GAS")
 	TObjectPtr<UAttributeSet> AttributeSet;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Effects")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Attributes")
 	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributesClass;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Attributes")
+	TSubclassOf<UGameplayEffect> DefaultSecondaryAttributesClass;
 
 };

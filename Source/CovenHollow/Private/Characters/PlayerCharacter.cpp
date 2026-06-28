@@ -68,6 +68,6 @@ void APlayerCharacter::InitAbilityActorInfo()
 		}
 	}
 
-	InitPrimaryAttributes();
+	InitDefaultAttributes();
 }
 
