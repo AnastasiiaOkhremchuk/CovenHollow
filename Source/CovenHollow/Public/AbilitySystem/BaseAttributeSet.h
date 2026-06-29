@@ -53,6 +53,7 @@ public:
 	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, ArmorPenetration)
 	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, BlockChance)
 	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, CriticalHitChance)
+	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, CriticalHitDamage)
 	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, CriticalHitResistance)
 	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, HealthRegeneration)
 	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, ManaRegeneration)
@@ -102,6 +103,8 @@ protected:
 	FGameplayAttributeData BlockChance;
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalHitChance, Category = "CovenHollow|SecondaryAttributes")
 	FGameplayAttributeData CriticalHitChance;
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalHitDamage, Category = "CovenHollow|SecondaryAttributes")
+	FGameplayAttributeData CriticalHitDamage;
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_CriticalHitResistance, Category = "CovenHollow|SecondaryAttributes")
 	FGameplayAttributeData CriticalHitResistance;
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_HealthRegeneration, Category = "CovenHollow|SecondaryAttributes")
@@ -153,6 +156,8 @@ protected:
 	void OnRep_BlockChance(const FGameplayAttributeData& OldBlockChance);
 	UFUNCTION()
 	void OnRep_CriticalHitChance(const FGameplayAttributeData& OldCriticalHitChance);
+	UFUNCTION()
+	void OnRep_CriticalHitDamage(const FGameplayAttributeData& OldCriticalHitDamage);
 	UFUNCTION()
 	void OnRep_CriticalHitResistance(const FGameplayAttributeData& OldCriticalHitResistance);
 	UFUNCTION()
