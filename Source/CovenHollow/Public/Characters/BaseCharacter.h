@@ -2,6 +2,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interaction/CombatInterface.h"
 #include "AbilitySystemInterface.h"
 
 #include "BaseCharacter.generated.h"
@@ -11,7 +12,7 @@ class UAttributeSet;
 class UGameplayEffect;
 
 UCLASS(Abstract)
-class COVENHOLLOW_API ABaseCharacter : public ACharacter, public IAbilitySystemInterface
+class COVENHOLLOW_API ABaseCharacter : public ACharacter, public IAbilitySystemInterface, public ICombatInterface
 {
 	GENERATED_BODY()
 

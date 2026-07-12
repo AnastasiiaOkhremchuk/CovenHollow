@@ -71,3 +71,11 @@ void APlayerCharacter::InitAbilityActorInfo()
 	InitDefaultAttributes();
 }
 
+int32 APlayerCharacter::GetCharacterLevel()
+{
+	ACHPlayerState* CHPlayerState = GetPlayerState<ACHPlayerState>();
+	check(CHPlayerState);
+
+	return CHPlayerState->GetCharacterLevel();
+}
+
