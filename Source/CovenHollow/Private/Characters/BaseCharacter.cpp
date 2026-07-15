@@ -21,6 +21,7 @@ void ABaseCharacter::InitDefaultAttributes()
 {
     ApplyEffectToSelf(DefaultPrimaryAttributesClass, 1.0f);
     ApplyEffectToSelf(DefaultSecondaryAttributesClass, 1.0f);
+    ApplyEffectToSelf(DefaultVitalAttributesClass, 1.0f);
 }
 
 void ABaseCharacter::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level)

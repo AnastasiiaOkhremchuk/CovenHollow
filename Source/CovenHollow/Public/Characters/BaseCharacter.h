@@ -38,4 +38,6 @@ protected:
 	TSubclassOf<UGameplayEffect> DefaultPrimaryAttributesClass;
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Attributes")
 	TSubclassOf<UGameplayEffect> DefaultSecondaryAttributesClass;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "CovenHollow|Attributes")
+	TSubclassOf<UGameplayEffect> DefaultVitalAttributesClass;
 };
